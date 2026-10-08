@@ -24,6 +24,7 @@ void get_type(std::string command) {
     "echo",
     "exit",
     "type",
+    "pwd",
   };
   if (valid_commands.contains(command)) {
     std::cout << command << " is a shell builtin" << std::endl;
@@ -54,6 +55,8 @@ int main() {
       std::cout << command.substr(5) << std::endl;
     } else if (command.substr(0, 5) == "type ") {
       get_type(command.substr(5));
+    } else if (command.substr(0, 3) == "pwd") {
+      std::cout << std::filesystem::current_path().string() << std::endl;
     } else {
       if (get_command_path(command.substr(0, command.find(' '))) != "") {
         std::system(command.c_str());
