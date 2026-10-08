@@ -59,6 +59,9 @@ int main() {
       std::cout << std::filesystem::current_path().string() << std::endl;
     } else if (command.substr(0, 3) == "cd ") {
       std::string path = command.substr(3);
+      if (path == "~") {
+        path = std::getenv("HOME");
+      }
       if (std::filesystem::is_directory(path)) {
         std::filesystem::current_path(path);
       } else {
